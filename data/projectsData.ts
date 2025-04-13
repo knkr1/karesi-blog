@@ -7,12 +7,10 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    title: 'A Search Engine',
-    description: `What if you could look up any information in the world? Webpages, images, videos
-    and more. Google has many features to help you find exactly what you're looking
-    for.`,
-    imgSrc: '/static/images/google.png',
-    href: 'https://www.google.com',
+    title: 'Open Deprem',
+    description: `One of my projects that I made for fun. It's a interactive map that updates itself regularly and shows the lastest eartquakes inside and near Turkiye.`,
+    imgSrc: '/static/images/opendeprem.png',
+    href: 'https://github.com/knkr1/OpenDeprem',
   },
   {
     title: 'The Time Machine',

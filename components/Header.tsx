@@ -7,13 +7,9 @@ import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 
 const Header = () => {
-  let headerClass = 'flex items-center w-full bg-white dark:bg-gray-950 justify-between py-10'
-  if (siteMetadata.stickyNav) {
-    headerClass += ' sticky top-0 z-50'
-  }
 
   return (
-    <header className={headerClass}>
+    <header className="flex items-center w-full bg-white/20 dark:bg-gray-900/10 justify-between py-5 px-4 sticky top-5 z-50 backdrop-blur-sm rounded-2xl my-5">
       <Link href="/" aria-label={siteMetadata.headerTitle}>
         <div className="flex items-center justify-between">
           <div className="mr-3">
@@ -21,7 +17,7 @@ const Header = () => {
           </div>
           {typeof siteMetadata.headerTitle === 'string' ? (
             <div className="hidden h-6 text-2xl font-semibold sm:block">
-              {siteMetadata.headerTitle}
+              🖥️ {siteMetadata.headerTitle}
             </div>
           ) : (
             siteMetadata.headerTitle

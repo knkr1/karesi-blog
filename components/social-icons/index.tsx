@@ -11,6 +11,9 @@ import {
   Instagram,
   Medium,
   Bluesky,
+  Nextjs,
+  Tailwind,
+
 } from './icons'
 
 const components = {
@@ -26,6 +29,8 @@ const components = {
   instagram: Instagram,
   medium: Medium,
   bluesky: Bluesky,
+  nextjs: Nextjs,
+  tailwind:Tailwind,
 }
 
 type SocialIconProps = {
