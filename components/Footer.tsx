@@ -5,7 +5,7 @@ import FloatingHeartsText from './MiniComponents/FloatingHeartsText'
 export default function Footer() {
   return (
     <footer>
-      <hr className="border-t-4 border-slate-800 rounded-full my-10 mx-7" />
+      <hr className="border-t-4 border-slate-200 dark:border-slate-800 rounded-full my-10 mx-7" />
       <div className="mt-10 flex flex-col items-center">
         <div className="mb-3 flex space-x-4">
           <SocialIcon kind="mail" href={`mailto:${siteMetadata.email}`} size={6} />

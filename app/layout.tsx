@@ -83,7 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="apple-mobile-web-app-title" content="karesi??" />
       <link rel="manifest" href="/static/favicons/site.webmanifest" />
 
-      <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
+      <body className="bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] pl-[calc(100vw-100%)] text-black antialiased dark:bg-[#17202a] dark:bg-[radial-gradient(#17202a_1px,#0b1015_1px)] dark:bg-[size:20px_20px] dark:text-white">
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>
