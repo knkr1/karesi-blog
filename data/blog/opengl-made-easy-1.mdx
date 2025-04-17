@@ -1,0 +1,110 @@
+---
+title: 'OpenGL Made Easy - 1'
+date: '2025-04-16'
+lastmod: '2025-04-16'
+tags: ['opengl']
+draft: false
+summary: First part and introduction into OpenGL
+---
+
+# Introduction
+
+Welcome to one of my first tutorials ever, OpenGL Made Easy.  
+I wanna mention this: **nowadays our attention span is pretty low**. We can blame this on many reasons, like phones, TikTok, and more.  
+On the other hand, there are **brilliant kids** who like to learn advanced things like this but get lost in heavy tutorials.
+
+Shortly, this tutorial is for you **if you don't wanna waste much time**, or you want **simpler explanations**.
+
+> [!NOTE]  
+> I'll explain how OpenGL works from my own perspective. I could make mistakes — I'm not an OpenGL professional. My only purpose is to explain everything in a simpler way.  
+> You are free to contribute to this tutorial since it's open-source.
+
+# Requirements
+
+Since we'll work with a specific language (C++) and some basic knowledge, you'll need to meet these:
+
+- Beginner-level C++
+- Know how languages like C or C++ manage memory dynamically. [It's actually simple; C is recommended.](https://www.w3schools.com/c/c_memory_management.php)
+
+# Some Info
+
+If a text has a red background, <MyTooltip content="Hello!"><span className="px-2 p-1 bg-red-500/30 rounded-md font-bold">you can hover it!</span></MyTooltip>
+
+# What's OpenGL?
+
+If this is your first time hearing about OpenGL: **OpenGL is not a library!**
+
+It's actually an  
+<MyTooltip content="Means application programming interface, imagine it as a bridge between two towns. You use this bridge to connect to the other town."><span className="px-2 p-1 bg-red-500/30 rounded-md font-bold">API</span></MyTooltip>,
+which serves as the bridge between your program and GPU.
+
+In this tutorial, I'll also show you how to use **GLAD**. OpenGL by itself won't load the functions you need — GLAD will do that.
+
+Another thing: because OpenGL isn't a typical library, it can be tricky at first to control the GPU.  
+Example: To draw a single triangle (which we'll do later), we first have to call a function just to **say** we want to send data, before actually sending it.
+
+That was super confusing for me at first. OpenGL is really  
+<MyTooltip content="Low-Level means how close you are to pure machine code. OpenGL is low-level because it's close to the GPU code."><span className="px-2 p-1 bg-red-500/30 rounded-md font-bold">low-level</span></MyTooltip>,
+but that's also why it's insanely powerful for optimization.
+
+# Small Q&A
+
+1. **Can I use C instead of C++?**  
+   - C++ has extra features like OOP, which help a lot because video games have tons of objects.  
+   - OpenGL supports C too, but I think there's no reason to limit yourself.
+
+2. **Why OpenGL?**  
+   - OpenGL is perfect (in my opinion) for small teams or learning game development. It has huge community support.  
+   - The alternative is **Vulkan**, which is even lower-level — you control everything manually.  
+   
+> [!WARNING]  
+> **Don't learn Vulkan unless you are part of a big team. It’s overkill for small projects. Even making a basic game could take a year.**
+
+# Basic Setup
+
+Everyone has their favorite IDE.  
+In most C++ projects, you'll see **Visual Studio** being used.
+
+Personally, I prefer simpler and lighter options like **Visual Studio Code**.  
+Since setup is different for each IDE, I'll just give you the links to what you need.
+
+In this tutorial, I'll use **Visual Studio Code**. But again, it's your choice — the only difference will be in compiling.
+
+> [!NOTE]  
+> For actually setting up OpenGL, please refer to external tutorials. I'll just tell you the libraries and why you need them.
+
+## Libraries:
+
+1. [**GLFW**](https://www.glfw.org/): Our main helper library.
+
+   **A library?** Well, yeah, sort of.  
+   GLFW helps you with annoying stuff while using OpenGL — like creating windows and handling input.
+
+   Without GLFW, you'd have to use **WinAPI** (the core of Windows apps and games).
+
+> [!IMPORTANT]  
+> Don't confuse OpenGL with GLFW. OpenGL is supported by almost every GPU and ready to be used.
+
+2. [GLAD](https://glad.dav1d.de/): The tool that loads OpenGL functions for us.
+
+OpenGL is just an API. It's already on your computer (as long as you have GPU drivers).  
+If you go to the OpenGL website and click download, it just redirects you to your GPU brand's website.
+
+**But:**  
+You have OpenGL installed, but you don't have the functions directly usable.  
+GLAD loads those functions so you can just call them easily.
+
+Without GLAD:
+```cpp
+PFNGLGENBUFFERSPROC glGenBuffers = (PFNGLGENBUFFERSPROC)wglGetProcAddress("glGenBuffers");
+glGenBuffers(1, &vbo);
+```
+With GLAD:
+```cpp
+glGenBuffers(1, &VBO);
+// Don't worry about the parameters. Just know the functions are pre-defined!
+```
+# End of This Tutorial
+
+In the next tutorial, we'll create a simple window.
+Feel free to ask me questions — on Discord, by email, or in a comment below! (If I added that feature yet 😁)
