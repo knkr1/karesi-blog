@@ -2,7 +2,7 @@
 const siteMetadata = {
   title: 'Karesi Blog',
   author: 'knkr1',
-  headerTitle: 'Karesi',
+  headerTitle: 'karesi.dev',
   description: 'Lastest Posts',
   language: 'en-us',
   theme: 'system', // system, dark or light

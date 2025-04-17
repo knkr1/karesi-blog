@@ -5,7 +5,7 @@ import FloatingHeartsText from './MiniComponents/FloatingHeartsText'
 export default function Footer() {
   return (
     <footer>
-      <hr className="border-t-4 border-slate-200 dark:border-slate-800 rounded-full my-10 mx-7" />
+      <hr className="mx-7 my-10 rounded-full border-t-4 border-slate-200 dark:border-slate-800" />
       <div className="mt-10 flex flex-col items-center">
         <div className="mb-3 flex space-x-4">
           <SocialIcon kind="mail" href={`mailto:${siteMetadata.email}`} size={6} />
@@ -20,14 +20,18 @@ export default function Footer() {
           <SocialIcon kind="threads" href={siteMetadata.threads} size={6} />
           <SocialIcon kind="medium" href={siteMetadata.medium} size={6} />
         </div>
-        <div className='flex flex-row gap-2 items-center'>
+        <div className="flex flex-row items-center gap-2">
           <span>Made with</span>
           <SocialIcon kind="nextjs" href="https://nextjs.org/" size={6}></SocialIcon>
           <span>| Designed with</span>
           <SocialIcon kind="tailwind" href="https://tailwindcss.com/" size={6}></SocialIcon>
           <span>| Most importantly, possible with</span>
-          <FloatingHeartsText><span className='bg-gradient-to-b from-red-400 to-red-600 text-transparent bg-clip-text font-bold text-xl'>Love</span></FloatingHeartsText>
-          </div>
+          <FloatingHeartsText>
+            <span className="bg-gradient-to-b from-red-400 to-red-600 bg-clip-text text-xl font-bold text-transparent">
+              Love
+            </span>
+          </FloatingHeartsText>
+        </div>
         <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
           <div>{siteMetadata.author}</div>
           <div>{` • `}</div>

@@ -1,14 +1,16 @@
-"use client"
+'use client'
 
-import { useState, useEffect, type ReactNode } from "react"
-import { Heart } from "lucide-react"
+import { useState, useEffect, type ReactNode } from 'react'
+import { Heart } from 'lucide-react'
 
 interface FloatingHeartsTextProps {
   children: ReactNode
 }
 
 export default function FloatingHeartsText({ children }: FloatingHeartsTextProps) {
-  const [hearts, setHearts] = useState<{ id: number; left: number; delay: number; size: number }[]>([])
+  const [hearts, setHearts] = useState<{ id: number; left: number; delay: number; size: number }[]>(
+    []
+  )
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -32,13 +34,13 @@ export default function FloatingHeartsText({ children }: FloatingHeartsTextProps
   }, [])
 
   return (
-    <div className="relative inline-flex justify-center items-center py-4 ">
+    <div className="relative inline-flex items-center justify-center py-4">
       {children}
 
       {hearts.map((heart) => (
         <Heart
           key={heart.id}
-          className="absolute bottom-0 text-red-500 fill-red-500 opacity-80 animate-float-up"
+          className="animate-float-up absolute bottom-0 fill-red-500 text-red-500 opacity-80"
           style={{
             left: `${heart.left}%`,
             animationDelay: `${heart.delay}s`,
@@ -59,7 +61,7 @@ export default function FloatingHeartsText({ children }: FloatingHeartsTextProps
             opacity: 0;
           }
         }
-        
+
         .animate-float-up {
           animation: float-up 3s ease-out forwards;
         }

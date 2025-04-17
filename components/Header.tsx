@@ -7,9 +7,8 @@ import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 
 const Header = () => {
-
   return (
-    <header className="flex items-center w-full bg-white/20 dark:bg-gray-900/10 justify-between py-5 px-4 sticky top-5 z-50 backdrop-blur-sm rounded-2xl my-5">
+    <header className="sticky top-5 z-50 my-5 flex w-full items-center justify-between rounded-2xl bg-white/20 px-4 py-5 backdrop-blur-sm dark:bg-gray-900/10">
       <Link href="/" aria-label={siteMetadata.headerTitle}>
         <div className="flex items-center justify-between">
           <div className="mr-3">

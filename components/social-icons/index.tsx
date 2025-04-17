@@ -13,7 +13,6 @@ import {
   Bluesky,
   Nextjs,
   Tailwind,
-
 } from './icons'
 
 const components = {
@@ -30,7 +29,7 @@ const components = {
   medium: Medium,
   bluesky: Bluesky,
   nextjs: Nextjs,
-  tailwind:Tailwind,
+  tailwind: Tailwind,
 }
 
 type SocialIconProps = {
