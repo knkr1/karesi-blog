@@ -6,7 +6,7 @@ export default function MyTooltip({ children, content }: { children: React.React
   return (
     <Tooltip.Provider>
       <Tooltip.Root>
-        <Tooltip.Trigger asChild>{children}</Tooltip.Trigger>
+        <Tooltip.Trigger asChild><span className="px-2 p-1 bg-red-500/30 rounded-md font-bold">{children}</span></Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content className="bg-black text-white px-2 py-1 rounded text-sm" sideOffset={5}>
             {content}
