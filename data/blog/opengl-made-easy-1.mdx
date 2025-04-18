@@ -15,6 +15,8 @@ On the other hand, there are **brilliant kids** who like to learn advanced thing
 
 Shortly, this tutorial is for you **if you don't wanna waste much time**, or you want **simpler explanations**.
 
+In this tutorial, I'll not only explain OpenGL but also try to give you a specific perspective on how things actually work!
+
 > [!NOTE]  
 > I'll explain how OpenGL works from my own perspective. I could make mistakes â€” I'm not an OpenGL professional. My only purpose is to explain everything in a simpler way.  
 > You are free to contribute to this tutorial since it's open-source.
@@ -28,14 +30,14 @@ Since we'll work with a specific language (C++) and some basic knowledge, you'll
 
 # Some Info
 
-If a text has a red background, <MyTooltip content="Hello!"><span className="px-2 p-1 bg-red-500/30 rounded-md font-bold">you can hover it!</span></MyTooltip>
+If a text has a red background, <MyTooltip content="Hello!">you can hover it!</MyTooltip>
 
 # What's OpenGL?
 
 If this is your first time hearing about OpenGL: **OpenGL is not a library!**
 
 It's actually an  
-<MyTooltip content="Means application programming interface, imagine it as a bridge between two towns. You use this bridge to connect to the other town."><span className="px-2 p-1 bg-red-500/30 rounded-md font-bold">API</span></MyTooltip>,
+<MyTooltip content="Means application programming interface, imagine it as a bridge between two towns. You use this bridge to connect to the other town.">API</MyTooltip>,
 which serves as the bridge between your program and GPU.
 
 In this tutorial, I'll also show you how to use **GLAD**. OpenGL by itself won't load the functions you need â€” GLAD will do that.
@@ -44,7 +46,7 @@ Another thing: because OpenGL isn't a typical library, it can be tricky at first
 Example: To draw a single triangle (which we'll do later), we first have to call a function just to **say** we want to send data, before actually sending it.
 
 That was super confusing for me at first. OpenGL is really  
-<MyTooltip content="Low-Level means how close you are to pure machine code. OpenGL is low-level because it's close to the GPU code."><span className="px-2 p-1 bg-red-500/30 rounded-md font-bold">low-level</span></MyTooltip>,
+<MyTooltip content="Low-Level means how close you are to pure machine code. OpenGL is low-level because it's close to the GPU code.">low-level</MyTooltip>,
 but that's also why it's insanely powerful for optimization.
 
 # Small Q&A
@@ -73,12 +75,20 @@ In this tutorial, I'll use **Visual Studio Code**. But again, it's your choice â
 > [!NOTE]  
 > For actually setting up OpenGL, please refer to external tutorials. I'll just tell you the libraries and why you need them.
 
+> [!IMPORTANT]
+> We will use `OpenGL 3.3` and `Core` mode for this tutorial. GLAD asks it (In their download page) so choose GL 3.3 and Core Mode.
+
+**Here are some tutorials for setting up GLFW and GLAD:**
+1. [C++ OpenGL setup for VSCode in 2min by **Codeus**](https://www.youtube.com/watch?v=Y4F0tI7WlDs)
+2. [Setting up OpenGL and Creating a Window in C++ by **The Cherno**](https://www.youtube.com/watch?v=OR4fNpBjmq8&t=827s)
 ## Libraries:
 
 1. [**GLFW**](https://www.glfw.org/): Our main helper library.
 
    **A library?** Well, yeah, sort of.  
    GLFW helps you with annoying stuff while using OpenGL â€” like creating windows and handling input.
+
+   So we can say that it's actually a helper library.
 
    Without GLFW, you'd have to use **WinAPI** (the core of Windows apps and games).
 
@@ -90,8 +100,8 @@ In this tutorial, I'll use **Visual Studio Code**. But again, it's your choice â
 OpenGL is just an API. It's already on your computer (as long as you have GPU drivers).  
 If you go to the OpenGL website and click download, it just redirects you to your GPU brand's website.
 
-**But:**  
-You have OpenGL installed, but you don't have the functions directly usable.  
+**Also:**  
+You have OpenGL installed, **but you don't have the functions directly usable**.  
 GLAD loads those functions so you can just call them easily.
 
 Without GLAD:
