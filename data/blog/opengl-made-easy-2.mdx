@@ -1,0 +1,249 @@
+---
+title: 'OpenGL Made Easy - 2'
+date: '2025-04-17'
+lastmod: '2025-04-17'
+tags: ['opengl']
+draft: false
+summary: Second part into OpenGL where we will create a window
+---
+
+# Welcome back!
+
+I see that you are back on track. It's nice that you have the motivation to learn OpenGL.  
+Here’s a reminder, if you don't know: if you really want to learn OpenGL, **practice, practice, and practice!**
+
+What do I mean by practice?  
+You should be able to put what you learned into your code (memorizing functions isn't expected, just know how they work) and create your own programs with them.
+
+So what will we learn in this tutorial? We will create a window!  
+Creating a window is not the "Hello World" of OpenGL. It's actually drawing a triangle.  
+But since **OpenGL** is too hard, you can think of it as part of "Hello World".
+
+Also, I really suggest you to **experiment**. When we create a viewport, set up hints, or create a window in this tutorial, we will use some parameters by default only for the sake of this tutorial.  
+By entering your own parameters there, you may actually understand how things work.
+
+# Let's get started!
+
+> [!NOTE]  
+> You can write everything into your code in the order I explain it. But I'll give you the full code at the end of the tutorial!
+
+### Including libraries
+```cpp
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <iostream>
+```
+
+> [!CAUTION]  
+> You should include **GLAD** before **GLFW**. Why? Because **GLFW** uses OpenGL functions at some parts.  
+> We include **GLAD** first so we can avoid using wrong headers.
+
+### Initializing GLFW
+
+```cpp
+glfwInit();
+glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+//glfwWindowHint(GLFW_RESIZABLE, GL_FALSE); //OPTIONAL
+```
+
+Okay, let's break down everything!  
+- `glfwInit()` initializes its components.  
+- `glfwWindowHint` sets specific options for our window, such as OpenGL version, OpenGL profile type, resizable setting, and more.  
+    1. First parameter specifies which option we want to change or add.  
+    2. Second parameter is the value we want to assign.  
+    3. `GLFW_CONTEXT_VERSION_x` specifies the OpenGL version. Major sets x.3 and Minor sets 3.x.  
+    4. `GLFW_OPENGL_PROFILE` sets up our profile mode.  
+        - You may ask **"What's an OpenGL Profile?"** It's a way to specify which features we want to use. We use Core since it's the modern option.  
+    5. `GLFW_RESIZABLE` sets whether we can resize our window. You may disable it for now.
+
+By setting Major and Minor to 3, we say that we are using OpenGL 3.3.
+
+```cpp
+glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+```
+
+### Creating Window
+
+```cpp
+GLFWwindow* window = glfwCreateWindow(800, 600, "Hello World", NULL, NULL);
+if (window == NULL)
+{
+    std::cout << "Couldn't create the window" << std::endl;
+    glfwTerminate();
+    return -1;
+}
+glfwMakeContextCurrent(window);
+```
+
+- `glfwCreateWindow` creates a window.  
+    1. First two parameters specify the width and height.  
+    2. Third is the name of the window.  
+    3. Fourth is for full screen. We put `NULL` because we want windowed mode.  
+        - If you want to experiment with full screen, call `GLFWmonitor* monitor = glfwGetPrimaryMonitor();` and write this variable instead of the NULL.
+    4. Fifth is not important for us right now.  
+- `glfwTerminate` closes everything if we fail.  
+- `glfwMakeContextCurrent` tells GLFW **"This is the window I'll use."**
+
+We check if the window creation is successful because finding errors in OpenGL is painful otherwise.
+
+### Initializing GLAD
+```cpp
+if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+{
+    std::cout << "Failed to initialize GLAD" << std::endl;
+    return -1;
+} 
+```
+> [!NOTE]  
+> If you look at the code, you’ll notice we only used `glfw` functions until now, not `gl`.  
+> By initializing GLAD, now we can start using OpenGL (`gl`) functions!
+
+I'll not waste your time: we just loaded our OpenGL functions.
+
+### Viewport 
+
+```cpp
+glViewport(0, 0, 800, 600);
+glfwSetFramebufferSizeCallback(window, resizeViewport);  
+```
+```cpp
+void resizeViewport(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}  
+```
+
+- `glViewport` specifies the part of the window where we want to draw.  
+    1. First and second parameters are the origin. (It's not important for now)
+    2. Third and fourth parameters are width and height.  
+- `glfwSetFramebufferSizeCallback` says **"When this window gets resized, run this function."**
+
+Imagine if resizing is enabled and a user changes the window size — without this <MyTooltip content="Callback is functions we give as a parameter.">callback</MyTooltip>, our render would stay the same size!
+By running a callback that adjusts the viewport size, we fix this.
+
+### Main Game Loop
+
+```cpp
+while (!glfwWindowShouldClose(window))
+{
+    processInput(window);
+
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+}  
+glfwTerminate();
+return 0;
+```
+```cpp
+void processInput(GLFWwindow *window)
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
+```
+Alright, now we have a running window.  
+Breaking it down:  
+- `glfwWindowShouldClose` checks if the window should close.  
+- `processInput` checks for user input.  
+
+> [!IMPORTANT]  
+> **Always process input before drawing!**
+
+- `glfwSwapBuffers` swaps the back and front buffers.  
+    - Example: We have a program that draws red, green, and blue-colored triangles in order. We just drew the red one and are about to draw the green one. But when we run the draw function, we won’t see the new triangle instantly. It’s actually stored behind the old triangle. By running swap buffers, we swap the old triangle with the new one!
+- `glfwPollEvents` checks for events like keyboard and mouse.  
+- `glfwTerminate` frees memory when we're done.
+
+### Setting background color
+
+Also let's setup the background color!
+
+```cpp
+glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+glClear(GL_COLOR_BUFFER_BIT);
+```
+
+- `glClearColor` tells OpenGL **"Use this color next time you clear."**  
+    - Parameters are like RGB but from 0 to 1, not 0 to 255. Also we have 
+    <MyTooltip content="It specifies the transparency of the color. 1 means fully visible, 0 means fully invisible">Alpha</MyTooltip>, 
+    which is between 1 and 0.
+    - I was actually using my own function that can convert by doing `(value / 255.0)`, which mathematically converts the value to be between 0 and 1. You might want to try something like that.
+    - `f` after numbers tells C++ that it's a float.
+- `glClear` means **"Now, paint the screen with the color we set."**
+
+`GL_COLOR_BUFFER_BIT` means we want to clear the screen color.
+
+### Full Code
+
+```cpp
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <iostream>
+
+
+void processInput(GLFWwindow *window);
+void resizeViewport(GLFWwindow* window, int width, int height);
+
+
+int main(){
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    //glfwWindowHint(GLFW_RESIZABLE, GL_FALSE); //OPTIONAL
+
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Hello World", NULL, NULL);
+    if (window == NULL)
+    {
+        std::cout << "Couldn't create the window" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
+
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        return -1;
+    } 
+
+    glViewport(0, 0, 800, 600);
+    glfwSetFramebufferSizeCallback(window, resizeViewport);  
+    while (!glfwWindowShouldClose(window))
+    {
+        processInput(window);
+
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }  
+    glfwTerminate();
+    return 0;
+}
+
+void resizeViewport(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}  
+
+void processInput(GLFWwindow *window)
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
+
+```
+
+You should have something like this!
+![OpenGL Hello World Window](/static/images/opengl/helloworldwindow.png)
+
+
+### End of this tutorial
+
+The next tutorial will be tough for us!  
+Please let me know your thoughts and recommendations!
