@@ -72,6 +72,9 @@ module.exports = () => {
     eslint: {
       dirs: ['app', 'components', 'layouts', 'scripts'],
     },
+    turbopack: {
+    // ...
+    },
     images: {
       remotePatterns: [
         {
